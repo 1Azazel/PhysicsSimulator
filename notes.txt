@@ -1,0 +1,88 @@
+dependencies:
+- pymunk: library for 2-D calculations
+- pygame: library that we are using to visualize the calculations
+- sys: library for system functions?
+
+pymunk
+- 2D physics engine
+- independent library, will work independently of pygame
+- does not require visualizer
+
+Calculate Physics --> Visualize Results
+[pymunk] --> [pygame]
+
+you could very easily swap out pygame for any other program that visualizes data
+pyplot? etc.
+
+https://www.youtube.com/watch?v=Wdyn1uGkRAU
+^intro to pygame
+
+https://www.youtube.com/watch?v=YrNpkuVIFdg
+^simulating physics in python
+________________________________________________________________________________
+
+How pymunk works:             _______
+                             |       |
+pymunk allows us to create a | space |
+                             |_______|
+                             
+a space is just the dimensions of a place where Physics can happen
+
+we can impose two physical laws on this space:
+- gravity
+- update
+
+
+we can create physical objects in a space
+
+Physical Objects are composed of a Body, and a Shape:
+Body:
+- does not have shape
+- can accept physics, but cannot collide with anything
+- think of an atom
+
+Shape:
+- An area around the body that can collide
+______________________________________________________________________________________
+
+PYMUNK OVERVIEW
+
+(copy and pasted from the pymunk documentation page here:
+https://www.pymunk.org/en/latest/overview.html)
+
+There are 4 basic classes you will use in Pymunk.
+
+Rigid Bodies (pymunk.Body)
+A rigid body holds the physical properties of an object.
+(mass, position, rotation, velocity, etc.)
+It does not have a shape by itself
+Rigid bodies are able to rotate, unlike particles!
+Rigid bodies generally tend to have a 1:1 correlation to sprites in a game
+You should structure your game so that you use the position and rotation
+of the rigid body for the drawing of your sprite
+
+Collision Shapes(pymunk.Circle, pymunk.Segment and pymunk.Poly)
+By attaching shapes to bodies, you can define the body's shape
+You can attach many shapes to a single body to define a complex shape
+Or none if it doesn't require a shape
+
+Constraints/Joints(pymunk.constraint.PinJoint, pymunk.constraint.SimpleMotor and many others)
+You can attach constraints between two bodies to constrain their behavior
+For example, to keep a fixed distance between two bodies
+
+Spaces (pymunk.Space)
+Spaces are the basic simulation unit in Pymunk
+You add bodies, shapes, and constraints to a space
+And then update the space as a whole
+They control how all the rigid bodies, shapes, and constraints interact together
+
+The actual simulation is done by the Space
+After adding the objects that should be simulated to the Space,
+Time is moved forward in small steps with the pymunk.Space.step() function
+
+______________________________________________________________________________________
+
+
+
+
+
