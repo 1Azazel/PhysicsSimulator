@@ -2,19 +2,6 @@ import pygame  # importing modules
 import pymunk
 import sys
 
-GRAVITATIONAL_CONSTANT = 6.6743 * (10 ** -11)
-# Mass Units must be Kilograms
-# R Units must be meters
-
-GM = "Standard Gravitational Parameter"
-
-"""
-Gravitational Force Equation:
-F = (G * M1 * M2) / (R ** 2)
-F ~ M1 * M2
-"""
-
-
 # Physical Bodies in pymunk:
 # - Static Body: A body that doesn't move, but other bodies can collide with it
 # - Dynamic Body: A body that can be moved by physics
@@ -87,7 +74,7 @@ space.gravity = (0, 100)  # first input corresponds to the horizontal gravity, s
 
 
 
-apple_surface = pygame.image.load("pixel_apple.png")  # importing a picture of an apple
+apple_surface = pygame.image.load("../pixel_apple.png")  # importing a picture of an apple
 apples = []  # creates a list to hold our simulation objects
 
 balls = []  # pycharm wants me to turn this sequence into a one-liner...
