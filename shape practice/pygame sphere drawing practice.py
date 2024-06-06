@@ -24,12 +24,14 @@ x_direction_vector = pygame.Vector2(np.tan(np.pi / 3) * (HEIGHT / 2) + (WIDTH / 
 y_direction_vector = pygame.Vector2((WIDTH / 2), 0)
 z_direction_vector = pygame.Vector2(np.tan(np.pi / 3) * (HEIGHT / 2) - (WIDTH / 2), HEIGHT)
 
+i = x_direction_vector.normalize()
+j = y_direction_vector.normalize()
+k = z_direction_vector.normalize()
+
 # For the circle that represents the xy cross-section of a sphere at the origin:
 # The circle would have a horizontal radius of r, and a vertical radius of r
 rx_of_xy_ellipse = RADIUS
 ry_of_xy_ellipse = RADIUS
-
-def get_xy_magnitude_of_xyz_vector():
 
 
 # Let's try and implement some matrix math to make the isometric transformations easier on ourselves
@@ -64,6 +66,11 @@ def list_of_xyz_to_list_of_pygame_vectors(coordinate_list):
     return vector_list
 
 
+def get_xy_magnitude_of_xyz_vector(point_at_end_of_vector):
+    xy_vector = xyz_coord_to_pygame_vector(point_at_end_of_vector)
+    return xy_vector.magnitude()
+
+
 # The rectangle that encloses a circle in the xy plane will have the following 4 points as coordinates:
 # (r, r, 0), (r, -r, 0), (-r, r, 0), (-r, -r, 0)
 # Since the pygame.Rect object requires the top left point, and the width and height;
@@ -73,19 +80,29 @@ def list_of_xyz_to_list_of_pygame_vectors(coordinate_list):
 # These points are in the xyz plane, first we must convert them to xy
 # Then we find the height via |y2 - y1|, and the width via |x2 - x1|
 
-
-def draw_ellipse(center):
-    x = center.x
-    y = center.y
-    rx =
-    ry =
-    pygame.gfxdraw.ellipse(screen, x, y, rx, ry, "black")
+# We are interested in the ellipses that are given by intersection of some 2D plane with some sphere
+# In 3 dimensions, we could represent the equation for each in the following ways:
 
 
 def draw_three_ellipses(center):
-    draw_ellipse(center, XY_RECT_COORD)
-    draw_ellipse(center, XZ_RECT_COORD)
-    draw_ellipse(center, YZ_RECT_COORD)
+    r = RADIUS
+    x1 = (r, 0, 0)
+    y1 = (0, r, 0)
+    z1 = (0, 0, r)
+
+    x1v = pygame.Vector3(x1)
+    print("pre-transform x radii len: " + str(x1v.length()))
+
+    x_radius = int(xyz_coord_to_pygame_vector(x1).length())
+    y_radius = int(xyz_coord_to_pygame_vector(y1).length())
+    z_radius = int(xyz_coord_to_pygame_vector(z1).length())
+
+    x = int(center.x)
+    y = int(center.y)
+    print("post-transform x radii length: " + str(x_radius))
+    pygame.gfxdraw.ellipse(screen, x, y, z_radius, y_radius, (100, 100, 100, 255))
+    # pygame.gfxdraw.ellipse(screen, x, y, x_radius, y_radius, color="black")
+    # pygame.gfxdraw.ellipse(screen, x, y, x_radius, z_radius, color="black")
 
 
 # pygame setup
