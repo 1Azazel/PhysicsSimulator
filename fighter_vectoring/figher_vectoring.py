@@ -8,7 +8,7 @@ HEIGHT = 800
 BOMBER_SPEED = 5
 FIGHTER_SPEED = 9
 
-POLYGON_FILE = "england_polygon_coord.csv"
+POLYGON_FILE = "great_britain_trace.csv"
 
 SCREEN_COLOR = "#FFEBD2"
 COAST_COLOR = "#273248"
